@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { publicAsset } from "@/lib/public-asset"
 
 const links = [
   { href: "/moduly", label: "Moduly" },
@@ -19,7 +20,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-4 px-4">
         <Link href="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
           <Image
-            src="/brand/bull-logo.svg"
+            src={publicAsset("/brand/bull-logo.svg")}
             alt="Bull"
             width={97}
             height={36}

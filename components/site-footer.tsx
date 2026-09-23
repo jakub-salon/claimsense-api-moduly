@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { publicAsset } from "@/lib/public-asset"
 
 export function SiteFooter() {
   return (
@@ -7,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 py-10 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <Image
-            src="/brand/bull-logo.svg"
+            src={publicAsset("/brand/bull-logo.svg")}
             alt="Bull"
             width={86}
             height={32}
