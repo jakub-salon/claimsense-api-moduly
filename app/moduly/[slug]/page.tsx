@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { JsonBlock } from "@/components/json-block"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CrossCheckVariables } from "@/components/cross-check-variables"
+import { crossCheckVariablesFor } from "@/lib/cross-check-variables"
 import { getModule, modules } from "@/lib/modules"
 import { industryLabel, processById } from "@/lib/taxonomy"
 
@@ -35,6 +37,7 @@ export default async function ModulePage({
   const moduleDef = getModule(slug)
   if (!moduleDef) notFound()
   const process = processById(moduleDef.process)
+  const variables = crossCheckVariablesFor(moduleDef.slug)
   const related = (moduleDef.relatedSlugs ?? [])
     .map((relatedSlug) => getModule(relatedSlug))
     .filter((item) => item !== undefined)
@@ -106,6 +109,13 @@ export default async function ModulePage({
           ))}
         </ul>
       </section>
+
+      {variables ? (
+        <CrossCheckVariables
+          documents={moduleDef.documents.map((document) => document.name)}
+          initial={variables}
+        />
+      ) : null}
 
       <section className="mt-10">
         <h2 className="font-tosh text-2xl font-medium tracking-tight">Co agent křížově kontroluje</h2>

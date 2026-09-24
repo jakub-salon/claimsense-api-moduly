@@ -10,6 +10,15 @@ export type ModuleDocument = {
   role: string
 }
 
+export type CrossCheckVariable = {
+  id: string
+  name: string
+  sourceDocument: string
+  sourceField: string
+  targetDocument: string
+  targetField: string
+}
+
 export type ApiModule = {
   slug: string
   apiName: string
