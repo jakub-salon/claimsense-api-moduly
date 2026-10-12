@@ -3,8 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { JsonBlock } from "@/components/json-block"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CheckPrompts } from "@/components/check-prompts"
 import { CrossCheckVariables } from "@/components/cross-check-variables"
 import { crossCheckVariablesFor } from "@/lib/cross-check-variables"
 import { getModule, modules } from "@/lib/modules"
@@ -117,16 +116,10 @@ export default async function ModulePage({
         />
       ) : null}
 
-      <section className="mt-10">
-        <h2 className="font-tosh text-2xl font-medium tracking-tight">Co agent křížově kontroluje</h2>
-        <ul className="mt-4 flex flex-col gap-2">
-          {moduleDef.checks.map((check) => (
-            <li key={check} className="border-l-4 border-[#ff5539] bg-[#f2f2f3] px-3 py-2 text-sm leading-relaxed">
-              {check}
-            </li>
-          ))}
-        </ul>
-      </section>
+      <CheckPrompts
+        checks={moduleDef.checks}
+        documents={moduleDef.documents.map((document) => document.name)}
+      />
 
       <section className="mt-10">
         <h2 className="font-tosh text-2xl font-medium tracking-tight">Co se vrací</h2>
@@ -142,26 +135,6 @@ export default async function ModulePage({
             </div>
           ))}
         </dl>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="font-tosh text-2xl font-medium tracking-tight">Příklad kontraktu</h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#444]">
-          Názvy polí jsou anglicky, aby kontrakt držel napříč zeměmi. Obrazovka
-          likvidátora zůstává česky — mapování dělá volající systém.
-        </p>
-        <Tabs defaultValue="request" className="mt-4">
-          <TabsList variant="line">
-            <TabsTrigger value="request">Požadavek</TabsTrigger>
-            <TabsTrigger value="response">Odpověď</TabsTrigger>
-          </TabsList>
-          <TabsContent value="request" className="mt-3">
-            <JsonBlock value={moduleDef.request} title={`POST ${moduleDef.path}`} />
-          </TabsContent>
-          <TabsContent value="response" className="mt-3">
-            <JsonBlock value={moduleDef.response} title="200 application/json" />
-          </TabsContent>
-        </Tabs>
       </section>
 
       {related.length > 0 ? (

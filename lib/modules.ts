@@ -46,7 +46,7 @@ export const modules: ApiModule[] = [
     whySeparate:
       "Příjem volá jiný systém než likvidace škody a vrací strukturu případu, ne posudek. Dokud případ nemá pole, další API nemají na čem stát.",
     request: {
-      caller: { system: "salesforce", actor: "intake.bot", recordId: null },
+      caller: { system: "core_system", actor: "intake.bot", recordId: null },
       channel: "email",
       productCode: "motor_hull",
       documents: [
@@ -105,7 +105,7 @@ export const modules: ApiModule[] = [
     whySeparate:
       "Krytí je rozhodnutí nad smlouvou. Často ho drží jiný systém než faktury a fotky a likvidátor ho potřebuje dřív, než žádá o rozpočet.",
     request: {
-      caller: { system: "salesforce", actor: "petra.mala", recordId: "HAV-2026-18442" },
+      caller: { system: "core_system", actor: "petra.mala", recordId: "HAV-2026-18442" },
       policyId: "HAV-448291",
       documents: [
         { id: "doc_policy", type: "policy_schedule", filename: "hav-448291.pdf" },
@@ -157,7 +157,7 @@ export const modules: ApiModule[] = [
     whySeparate:
       "Úplnost řídí urgenci vůči klientovi. Je to levné volání nad metadaty, ne čtení všech stran.",
     request: {
-      caller: { system: "salesforce", actor: "petra.mala", recordId: "HAV-2026-18442" },
+      caller: { system: "core_system", actor: "petra.mala", recordId: "HAV-2026-18442" },
       productCode: "motor_hull",
       received: [
         { type: "fnol", documentId: "doc_fnol" },
@@ -196,7 +196,7 @@ export const modules: ApiModule[] = [
     process: "entitlement",
     industries: ["insurance", "bank", "health"],
     caller:
-      "CRM nebo core systém těsně před výplatou. Likvidátor ho volá, když se příjemce liší od pojištěného, dlužníka nebo pacienta.",
+      "CRM nebo Core Systém těsně před výplatou. Likvidátor ho volá, když se příjemce liší od pojištěného, dlužníka nebo pacienta.",
     documents: [
       { name: "Doklad totožnosti nebo výpis z rejstříku", role: "Jméno a identifikátor osoby." },
       { name: "Plná moc nebo dědické rozhodnutí", role: "Když nežádá pojištěný sám." },
@@ -216,7 +216,7 @@ export const modules: ApiModule[] = [
     whySeparate:
       "Oprávnění je kontrola identity a účtu. Nemá se míchat s tím, jestli faktura sedí na fotky — padá to do jiné fronty.",
     request: {
-      caller: { system: "salesforce", actor: "petra.mala", recordId: "HAV-2026-18442" },
+      caller: { system: "core_system", actor: "petra.mala", recordId: "HAV-2026-18442" },
       claimedPayee: { name: "Jan Král", account: "CZ6508000000001234567899" },
       documents: [
         { id: "doc_id", type: "national_id", filename: "op-kralova.pdf" },
@@ -256,7 +256,7 @@ export const modules: ApiModule[] = [
     process: "crosscheck",
     industries: ["insurance"],
     caller:
-      "Likvidátor havarijní škody ze Salesforce nebo z jádra likvidace. Systém pošle odkazy na dokumenty, které už ve spisu jsou.",
+      "Likvidátor havarijní škody z Core Systému. Systém pošle odkazy na dokumenty, které už ve spisu jsou.",
     documents: [
       { name: "Pojistná smlouva HAV", role: "VIN, RZ, spoluúčast, pojistná doba." },
       { name: "Hlášení škody", role: "Datum, místo, popis nárazu." },
@@ -273,14 +273,14 @@ export const modules: ApiModule[] = [
     ],
     resultFields: [
       { field: "result.claimedAmount", meaning: "Co žádá servis." },
-      { field: "result.supportedAmount", meaning: "Co podklady unesou." },
+      { field: "result.supportedAmount", meaning: "Částka, kterou dokumenty ve spisu skutečně doloží." },
       { field: "result.unsupportedAmount", meaning: "Rozdíl k došetření." },
       { field: "discrepancies", meaning: "Konkrétní nesoulad, dokumenty a obě hodnoty." },
     ],
     whySeparate:
       "Havarijní škoda má vlastní sadu dokumentů a vlastní číselník nesouladů. Stejné API by u akreditivu nebo CMR lhala o tom, co agent čte.",
     request: {
-      caller: { system: "salesforce", actor: "petra.mala", recordId: "HAV-2026-18442" },
+      caller: { system: "core_system", actor: "petra.mala", recordId: "HAV-2026-18442" },
       policy: { id: "HAV-448291", plate: "5A2 1847", vin: "TMBJG7NE5L0123456", deductible: { amount: 5000, currency: "CZK" } },
       documents: [
         { id: "doc_policy", type: "policy_schedule" },
@@ -650,7 +650,7 @@ export const modules: ApiModule[] = [
       "Už vystavený kredit za stejné okno se odečte, aby se neplatil dvakrát.",
     ],
     resultFields: [
-      { field: "result.creditedOutage", meaning: "Interval, který podklady unesou." },
+      { field: "result.creditedOutage", meaning: "Doba výpadku, kterou podklady skutečně doloží po srovnání ticketu s monitoringem." },
       { field: "result.grossCredit", meaning: "Kredit podle vzorce SLA." },
       { field: "result.alreadyCredited", meaning: "Co už faktura obsahuje." },
       { field: "result.netCredit", meaning: "Co se má nově zapsat." },
@@ -760,7 +760,7 @@ export const modules: ApiModule[] = [
     process: "settlement",
     industries: ["insurance"],
     caller:
-      "Jádro likvidace, až když modul křížové kontroly vrátil podloženou škodu. Bez ní se výpočet nespouští.",
+      "Core Systém, až když modul křížové kontroly vrátil podloženou škodu. Bez ní se výpočet nespouští.",
     documents: [
       { name: "Smlouva", role: "Spoluúčast, limit, režim DPH." },
       { name: "Podložená škoda", role: "Částka z předchozího modulu, ne z faktury naslepo." },
@@ -833,7 +833,7 @@ export const modules: ApiModule[] = [
     whySeparate:
       "Rozhodnutí je jiný kontrakt než kontrola. Vrací se do fronty likvidátora a bez jeho potvrzení volající systém výplatu nespustí.",
     request: {
-      caller: { system: "salesforce", actor: "petra.mala", recordId: "HAV-2026-18442" },
+      caller: { system: "core_system", actor: "petra.mala", recordId: "HAV-2026-18442" },
       priorModules: ["claims.coverage.match", "claims.motor.reconcile", "claims.payout.calculate"],
       documents: [
         { id: "doc_invoice", type: "repair_invoice" },

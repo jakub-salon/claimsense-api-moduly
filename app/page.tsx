@@ -17,7 +17,7 @@ export default function HomePage() {
               Likvidátor zůstane ve svém systému.
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#333]">
-              Salesforce, core banking nebo TMS pošle dokumenty na jedno API.
+              Core Systém, core banking nebo TMS pošle dokumenty na jedno API.
               Agent srovná fakta napříč podklady a výsledek zapíše zpátky do
               stejného záznamu.
             </p>
@@ -61,8 +61,8 @@ export default function HomePage() {
             </dl>
             <p className="mt-4 text-sm leading-relaxed text-[#444]">
               Agent nevrátí shrnutí případu. Vrátí nesoulad, obě hodnoty a
-              částku, kterou podklady unesou. Likvidátorka to uvidí na případu
-              ve Salesforce.
+              částku, kterou dokumenty skutečně doloží. Likvidátorka to uvidí na případu
+              v Core Systému.
             </p>
             <Link
               href="/scenare/skoda-octavia-hav"

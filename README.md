@@ -1,6 +1,6 @@
 # ClaimSense API moduly
 
-Klikací demo API, kterými systém likvidátora (Salesforce, core banking, TMS) volá agenta ClaimSense. Agent srovná fakta napříč dokumenty a výsledek vrátí do stejného záznamu.
+Klikací demo API, kterými systém likvidátora (Core Systém, core banking, TMS) volá agenta ClaimSense. Agent srovná fakta napříč dokumenty a výsledek vrátí do stejného záznamu.
 
 Demo je mock. Žádné ostré API, žádné reálné spisy. Názvy polí v JSON jsou anglicky, obrazovky česky.
 

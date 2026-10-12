@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { JsonBlock } from "@/components/json-block"
+import { ScenarioProcess } from "@/components/scenario-process"
 import type { Scenario, Severity } from "@/lib/types"
 import { industryLabel } from "@/lib/taxonomy"
 
@@ -185,7 +186,12 @@ export function ScenarioRunner({
           </div>
         </section>
 
-        <JsonBlock value={scenario.request} title="Požadavek" />
+        <ScenarioProcess
+          scenario={scenario}
+          apiPath={apiPath}
+          phase={phase}
+          visibleChecks={visibleChecks}
+        />
 
         <section aria-label="Práce agenta" className="border border-black/10 bg-white p-4">
           <div className="flex items-baseline justify-between gap-3">
@@ -309,7 +315,7 @@ export function ScenarioRunner({
           <section aria-label="Nesoulady a odpověď" className="flex flex-col gap-4">
             <div className="border border-[#ff5539] bg-white p-4">
               <h2 className="font-tosh text-lg font-medium tracking-tight">
-                Nesoulady, které se vrací do {scenario.caller.system}
+                Nesoulady, které se vrací do {scenario.caller.systemGenitive}
               </h2>
               <ul className="mt-4 flex flex-col gap-4">
                 {scenario.discrepancies.map((item) => (

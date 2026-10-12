@@ -9,8 +9,9 @@ export const scenarios: Scenario[] = [
     title: "Havarijní škoda, Škoda Octavia",
     dek: "Servis účtuje zadní nárazník a jiný VIN, než má smlouva. Fotky a protokol policie ukazují jen přední náraz.",
     caller: {
-      system: "Salesforce",
-      product: "Service Cloud · objekt Claim",
+      system: "Core Systém",
+      systemGenitive: "Core Systému",
+      product: "Likvidace · spis škody",
       actor: "Petra Malá",
       actorRole: "likvidátorka HAV",
       recordId: "HAV-2026-18442",
@@ -95,7 +96,7 @@ export const scenarios: Scenario[] = [
       },
     ],
     request: {
-      caller: { system: "salesforce", actor: "petra.mala", recordId: "HAV-2026-18442" },
+      caller: { system: "core_system", actor: "petra.mala", recordId: "HAV-2026-18442" },
       policy: {
         id: "HAV-448291",
         plate: "5A2 1847",
@@ -243,7 +244,7 @@ export const scenarios: Scenario[] = [
     error: {
       status: 503,
       code: "agent_unavailable",
-      message: "Agent teď neodpověděl. Záznam ve Salesforce se nezměnil.",
+      message: "Agent teď neodpověděl. Záznam v Core Systému se nezměnil.",
       traceId: "trc_motor_18442_err",
     },
   },
@@ -255,6 +256,7 @@ export const scenarios: Scenario[] = [
     dek: "Prezentace z Linze je po datu nalodění, míří do Rotterdamu místo Hamburku a faktura je o 400 eur výš.",
     caller: {
       system: "Core banking",
+      systemGenitive: "core bankingu",
       product: "Trade finance · prezentace dokumentů",
       actor: "Martin Horák",
       actorRole: "specialista trade finance",
@@ -500,6 +502,7 @@ export const scenarios: Scenario[] = [
     dek: "Příjemce vytkl dvě zničené palety při předání. Odesílatel chce celých 92 400 eur a plomba na fotce nesedí.",
     caller: {
       system: "TMS",
+      systemGenitive: "TMS",
       product: "Dispečink škod",
       actor: "Tomáš Veselý",
       actorRole: "disponent škod",

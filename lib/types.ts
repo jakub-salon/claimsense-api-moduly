@@ -72,6 +72,7 @@ export type Scenario = {
   dek: string
   caller: {
     system: string
+    systemGenitive: string
     product: string
     actor: string
     actorRole: string
