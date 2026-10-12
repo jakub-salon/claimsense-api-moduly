@@ -1,16 +1,12 @@
 import type { Metadata } from "next"
-import { Roboto } from "next/font/google"
 import localFont from "next/font/local"
+import "@fontsource/roboto/300.css"
+import "@fontsource/roboto/400.css"
+import "@fontsource/roboto/500.css"
+import "@fontsource/roboto/700.css"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import "./globals.css"
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-roboto",
-  display: "swap",
-})
 
 const tosh = localFont({
   src: [
@@ -33,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="cs" className={`${roboto.variable} ${tosh.variable} h-full antialiased`}>
+    <html lang="cs" className={`${tosh.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white text-[#1a1a1a]">
         <SiteHeader />
         <main className="flex-1">{children}</main>

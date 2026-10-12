@@ -50,6 +50,7 @@
 }
 
 :root {
+  --font-roboto: "Roboto";
   --background: #ffffff;
   --foreground: #1a1a1a;
   --card: #ffffff;
